@@ -78,7 +78,7 @@
   ],
   "artifacts": [
     {
-      "hash": "c86af8dfe584832666313f12e1607250a6178003487d1ed9af0f8586cc81ac3b",
+      "hash": "02244b49548ebbc25323d21674f7bc96459ef7b9106b45b780320c576738bef5",
       "name": "game-0.0.1.jar",
       "path": "https://github.com/renegadersps/hosting/raw/main/client/live/repo/game-0.0.1.jar",
       "size": 28943285
@@ -904,7 +904,7 @@
   ],
   "updates": [],
   "dependencyHashes": {
-    "game-0.0.1.jar": "c86af8dfe584832666313f12e1607250a6178003487d1ed9af0f8586cc81ac3b",
+    "game-0.0.1.jar": "02244b49548ebbc25323d21674f7bc96459ef7b9106b45b780320c576738bef5",
     "runelite-0.0.1.jar": "05a184a3ba0f5bb467b958e4cb2df30cf98d9e8776b18084ea0f85f7f1ea4ae7",
     "rs-cache-library-6.9.jar": "19910e74c0471369901fe5490de597f7402f8c15ac76f2dbb229f89048ee653b",
     "disio-2.2.jar": "c4eb3fd121df53906a0d0444570aa070debec7697fa38110ba8979231ae88a71",
