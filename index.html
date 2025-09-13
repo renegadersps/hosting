@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RuneScape Mills Casino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #212e1e 0%, #171717 100%);
+      color: #ffe566;
+      font-family: 'Roboto', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0 15px 0;
+      background: #232323;
+      box-shadow: 0 2px 16px #0009;
+      border-radius: 0 0 30px 30px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.7em;
+      color: #ffd700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #000;
+    }
+    header .subtitle {
+      color: #fff;
+      font-size: 1.15em;
+      font-weight: 500;
+      margin-top: 12px;
+      margin-bottom: 5px;
+      text-shadow: 0 2px 8px #000;
+    }
+    .mills-balance {
+      text-align: right;
+      font-size: 1.2em;
+      color: #ffe566;
+      font-weight: bold;
+      margin: 25px 0 10px 0;
+      padding-right: 10px;
+    }
+    .game-panels {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .panel {
+      background: #232323;
+      border-radius: 18px;
+      box-shadow: 0 2px 18px #000b;
+      min-width: 340px;
+      max-width: 400px;
+      flex: 1 1 350px;
+      padding: 28px 18px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.7em;
+      color: #ffd700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #000;
+    }
+    .instructions {
+      font-size: 1em;
+      color: #eee;
+      margin-bottom: 16px;
+      text-align: center;
+      opacity: 0.92;
+    }
+    .button {
+      padding: 12px 32px;
+      font-size: 1.1em;
+      background: linear-gradient(90deg, #ffd700 0%, #ffe566 100%);
+      color: #171717;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 18px 0 8px 0;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #0003;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    }
+    .button:active {
+      background: #ffe586;
+      transform: scale(0.98);
+    }
+    .button:disabled {
+      background: #888;
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.15em;
+      min-height: 28px;
+      color: #ffd700;
+      text-shadow: 0 1px 4px #000;
+      text-align: center;
+    }
+    /* Slots styles */
+    .slots-row {
+      font-size: 2.7em;
+      margin: 20px 0 10px 0;
+      letter-spacing: 13px;
+      text-align: center;
+      user-select: none;
+      transition: color 0.18s;
+      min-height: 1.2em;
+    }
+    /* Slots animation */
+    .slots-anim {
+      animation: slotSpin 0.7s cubic-bezier(.18,1.5,.48,.96);
+    }
+    @keyframes slotSpin {
+      0% { color: #ffd700; transform: scale(0.97) rotate(-7deg);}
+      40% { color: #ffe566; transform: scale(1.20) rotate(7deg);}
+      80% { color: #ffd700; transform: scale(0.98) rotate(-3deg);}
+      100% { color: #ffd700; transform: scale(1) rotate(0);}
+    }
+    /* Roulette styles */
+    .roulette-wheel {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 20px 0 12px 0;
+      flex-wrap: wrap;
+    }
+    .roulette-tile {
+      width: 58px;
+      height: 58px;
+      background: #333;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2em;
+      cursor: pointer;
+      border: 2.5px solid #ffd700;
+      box-shadow: 0 1px 9px #0007;
+      transition: background 0.2s, color 0.2s, border 0.2s, transform 0.18s;
+      user-select: none;
+    }
+    .roulette-tile.selected {
+      background: #ffe566;
+      color: #232323;
+      border: 2.5px solid #fff;
+      box-shadow: 0 2px 16px #ffd70099;
+      transform: scale(1.09);
+    }
+    /* Animations roulette */
+    .roulette-tile.spin-anim {
+      animation: spinTile 0.7s cubic-bezier(.18,1.5,.48,.96);
+    }
+    @keyframes spinTile {
+      0% { background: #ffd700; transform: scale(1.1);}
+      80% { background: #ffe566; transform: scale(1.15);}
+      100% { background: #fffbe6; transform: scale(1);}
+    }
+
+    @media (max-width: 900px) {
+      .game-panels { flex-direction: column; align-items: center; gap: 30px; }
+      .panel { min-width: 92vw; max-width: 97vw;}
+      .mills-balance { text-align: center;}
+    }
+    footer {
+      text-align: center;
+      color: #999;
+      font-size: 1em;
+      background: #232323;
+      border-top: 2px solid #111;
+      padding: 18px 0;
+      letter-spacing: 1px;
+      margin-top: 60px;
+      box-shadow: 0 -2px 8px #0007;
+    }
+    .logo-rs {
+      font-size: 1.6em;
+      padding-right: 7px;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 6px #ffe56677);
+    }
+    .reset-btn {
+      background: linear-gradient(90deg, #ff7847 0%, #ffd700 100%);
+      color: #fff;
+      margin-left: 8px;
+    }
+    .reset-btn:active { background: #ff7847; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="logo-rs">🪙</span>
+    <h1>RuneScape Mills Casino</h1>
+    <div class="subtitle">Play free slots & roulette, win big with mills!<br>
+      <span style="color:#ffe566;">No real money, just fun for RS fans.</span>
+    </div>
+  </header>
+  <div class="container">
+    <div class="mills-balance">
+      <span id="mills-balance">Your Mills: 100</span>
+      <button class="button reset-btn" id="reset-mills" title="Reset mills to 100">Reset</button>
+    </div>
+    <div class="game-panels">
+      <!-- Slots Panel -->
+      <section class="panel" id="slots-panel">
+        <h2>Slots</h2>
+        <div class="instructions">Spin for 1 mill. Match 3 symbols to win big!</div>
+        <div class="slots-row" id="slots-row">🎩 🪙 🗡️</div>
+        <button class="button" id="spin-slots">Spin</button>
+        <div class="result" id="slots-result"></div>
+      </section>
+      <!-- Roulette Panel -->
+      <section class="panel" id="roulette-panel">
+        <h2>Roulette</h2>
+        <div class="instructions">Pick a tile & bet 5 mills. Win if wheel lands on your pick!</div>
+        <div class="roulette-wheel" id="roulette-wheel"></div>
+        <button class="button" id="spin-roulette" disabled>Spin</button>
+        <div class="result" id="roulette-result"></div>
+      </section>
+    </div>
+  </div>
+  <footer>
+    🧑‍💻 Created for RuneScape fans. No affiliation with Jagex.<br>
+    &copy; 2025 renegadersps | Enjoy responsibly!
+  </footer>
+  <script>
+    // Symbols for slots and roulette
+    const slotSymbols = [
+      { emoji: "🪙", name: "Gold Coin" },
+      { emoji: "🎩", name: "Partyhat" },
+      { emoji: "🗡️", name: "Abyssal Whip" },
+      { emoji: "💎", name: "Dragonstone" },
+      { emoji: "🛡️", name: "Rune Shield" },
+      { emoji: "📦", name: "Mill Bag" }
+    ];
+    const rouletteTiles = [
+      { emoji: "🪙", name: "Gold" },
+      { emoji: "🎩", name: "Partyhat" },
+      { emoji: "🗡️", name: "Whip" },
+      { emoji: "💎", name: "Dstone" },
+      { emoji: "🛡️", name: "Rune" },
+      { emoji: "📦", name: "Mill Bag" }
+    ];
+    // Mills balance (shared between games)
+    let mills = 100;
+    // --- BALANCE LOGIC ---
+    function updateBalanceDisplay() {
+      document.getElementById("mills-balance").textContent = "Your Mills: " + mills;
+      document.getElementById("spin-slots").disabled = mills < 1;
+      document.getElementById("spin-roulette").disabled = mills < 5 || selectedRoulette === null;
+    }
+    // --- SLOTS LOGIC ---
+    function randomSlots() {
+      return [
+        slotSymbols[Math.floor(Math.random() * slotSymbols.length)],
+        slotSymbols[Math.floor(Math.random() * slotSymbols.length)],
+        slotSymbols[Math.floor(Math.random() * slotSymbols.length)],
+      ];
+    }
+    document.getElementById("spin-slots").onclick = function() {
+      if (mills < 1) return;
+      mills -= 1;
+      updateBalanceDisplay();
+      const slotsRow = document.getElementById("slots-row");
+      slotsRow.classList.remove("slots-anim");
+      // Animate slots
+      setTimeout(() => { slotsRow.classList.add("slots-anim"); }, 20);
+      setTimeout(() => {
+        const result = randomSlots();
+        slotsRow.textContent = result.map(s => s.emoji).join(" ");
+        // Check win conditions
+        let winText = "Better luck next spin!";
+        let payout = 0;
+        if (result.every(s => s.emoji === "📦")) {
+          winText = "💰 JACKPOT! Triple Mill Bags: +100 mills!";
+          payout = 100;
+        } else if (result[0].emoji === result[1].emoji && result[1].emoji === result[2].emoji) {
+          winText = `🎉 Triple ${result[0].name}: +20 mills!`;
+          payout = 20;
+        } else if (result[0].emoji === result[1].emoji || result[1].emoji === result[2].emoji || result[0].emoji === result[2].emoji) {
+          winText = "Nice! Double match: +5 mills!";
+          payout = 5;
+        }
+        mills += payout;
+        document.getElementById("slots-result").textContent = winText;
+        updateBalanceDisplay();
+      }, 680);
+    };
+    // --- ROULETTE LOGIC ---
+    let selectedRoulette = null;
+    function updateRouletteWheel() {
+      const wheel = document.getElementById("roulette-wheel");
+      wheel.innerHTML = "";
+      rouletteTiles.forEach((tile, idx) => {
+        const div = document.createElement("div");
+        div.className = "roulette-tile" + (selectedRoulette === idx ? " selected" : "");
+        div.textContent = tile.emoji;
+        div.title = tile.name;
+        div.onclick = function() {
+          selectedRoulette = idx;
+          updateRouletteWheel();
+          updateBalanceDisplay();
+        };
+        wheel.appendChild(div);
+      });
+    }
+    document.getElementById("spin-roulette").onclick = function() {
+      if (mills < 5 || selectedRoulette === null) return;
+      mills -= 5;
+      updateBalanceDisplay();
+      const tiles = document.querySelectorAll(".roulette-tile");
+      tiles.forEach(tile => tile.classList.remove("spin-anim"));
+      // Animate wheel spin
+      setTimeout(() => {
+        tiles[selectedRoulette].classList.add("spin-anim");
+      }, 20);
+      setTimeout(() => {
+        const outcome = Math.floor(Math.random() * rouletteTiles.length);
+        let winText;
+        if (outcome === selectedRoulette) {
+          winText = `🎉 You won! Wheel landed on ${rouletteTiles[outcome].name}: +50 mills!`;
+          mills += 50;
+        } else {
+          winText = `Missed! Wheel landed on ${rouletteTiles[outcome].name}.`;
+        }
+        document.getElementById("roulette-result").textContent = winText;
+        updateBalanceDisplay();
+      }, 680);
+    };
+    // --- RESET ---
+    document.getElementById("reset-mills").onclick = function() {
+      mills = 100;
+      document.getElementById("slots-result").textContent = "";
+      document.getElementById("roulette-result").textContent = "";
+      updateBalanceDisplay();
+    };
+    // --- INIT ---
+    updateBalanceDisplay();
+    updateRouletteWheel();
+  </script>
+</body>
+</html>
